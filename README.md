@@ -113,7 +113,3 @@ python run_eval.py --model_path ../distillation/outputs/minillm/final_model --nu
 ## License
 
 The paper is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (ACM copyright). Code in this repository is released under the [MIT License](LICENSE). The diagnostic dataset is for research use only; see the [Dataset](#dataset) section.
-
-## Acknowledgements
-
-Training follows the knowledge-distillation setup of [MiniLLM](https://arxiv.org/abs/2306.08543). Teacher serving uses [vLLM](https://docs.vllm.ai/).
