@@ -112,32 +112,6 @@ cd eval
 python run_eval.py --model_path ../distillation/outputs/minillm/final_model --num_samples 100
 ```
 
-## Citation
-
-If you use this repository or the paper, please cite:
-
-```bibtex
-@inproceedings{zuo2026autorepairbench,
-  title     = {{AutoRepairBench}: Benchmarking Long-Tailed, Safety-Critical Automotive Repair Reasoning},
-  author    = {Zuo, Chenyu and Zhou, Xuechen and Chen, Yongqi and Xue, Lei and Jiang, Shan and Shen, Jiaxing and Dong, Chengzu},
-  booktitle = {Proceedings of the 35th ACM International Conference on Information and Knowledge Management},
-  series    = {CIKM '26},
-  year      = {2026},
-  isbn      = {979-8-4007-2539-5},
-  publisher = {Association for Computing Machinery},
-  address   = {New York, NY, USA},
-  location  = {Rome, Italy},
-  doi       = {10.1145/3799682.3840599},
-  url       = {https://doi.org/10.1145/3799682.3840599}
-}
-```
-
-A `CITATION.cff` file is included so GitHub can generate the same citation.
-
-## Contact
-
-Corresponding author: Jiaxing Shen ([jiaxingshen@ln.edu.hk](mailto:jiaxingshen@ln.edu.hk)).
-
 ## License
 
 The paper is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (ACM copyright). Code in this repository is released under the [MIT License](LICENSE). The diagnostic dataset is for research use only; see the [Dataset](#dataset) section.
