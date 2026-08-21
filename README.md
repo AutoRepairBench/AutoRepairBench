@@ -98,12 +98,6 @@ Each record is a diagnosis request and a structured repair answer:
 }
 ```
 
-The file is stored with **Git LFS**. Clone with LFS enabled:
-
-```bash
-git lfs install
-git clone https://github.com/AutoRepairBench/Automotive-Fault-Diagnosis-via-Knowledge-Distilled-LLM.git
-```
 
 Data is released for **research use**. It contains OEM-style diagnostic wording (ECU names, DTC texts, service measures). Redistribute or use it only in line with applicable terms.
 
