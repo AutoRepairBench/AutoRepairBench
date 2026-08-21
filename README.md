@@ -9,10 +9,6 @@
 
 Official implementation of **AutoRepairBench**, our **CIKM '26** paper on knowledge distillation of large language models for long-tailed, safety-critical automotive repair reasoning.
 
-Chenyu Zuo<sup>1</sup>, Xuechen Zhou<sup>2</sup>, Yongqi Chen<sup>3</sup>, Lei Xue<sup>3</sup>, Shan Jiang<sup>2</sup>, [Jiaxing Shen](mailto:jiaxingshen@ln.edu.hk)<sup>1✉</sup>, Chengzu Dong<sup>1</sup>
-
-<sup>1</sup> Lingnan University &nbsp;&nbsp; <sup>2</sup> Sun Yat-sen University (Zhuhai) &nbsp;&nbsp; <sup>3</sup> Sun Yat-sen University (Shenzhen)
-
 **AutoRepairBench: Benchmarking Long-Tailed, Safety-Critical Automotive Repair Reasoning.**  
 *Proceedings of the 35th ACM International Conference on Information and Knowledge Management (CIKM '26)*, November 07–11, 2026, Rome, Italy.  
 DOI: [10.1145/3799682.3840599](https://doi.org/10.1145/3799682.3840599) · ISBN: 979-8-4007-2539-5
@@ -110,19 +106,6 @@ git clone https://github.com/AutoRepairBench/Automotive-Fault-Diagnosis-via-Know
 ```
 
 Data is released for **research use**. It contains OEM-style diagnostic wording (ECU names, DTC texts, service measures). Redistribute or use it only in line with applicable terms.
-
-## Requirements
-
-- Python 3.10+
-- NVIDIA GPU (see hardware table)
-- [Git LFS](https://git-lfs.com)
-- Linux or WSL is recommended: training/eval scripts are bash
-
-| Stage | Typical GPU memory |
-|-------|--------------------|
-| SFT (LoRA, 7B) | 24 GB+ |
-| Teacher (AWQ 32B) | 20 GB+ |
-| Distillation (student + teacher logits) | 80 GB (A100-class) |
 
 ## Quick Start
 
