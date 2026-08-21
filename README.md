@@ -9,9 +9,9 @@
 
 Official implementation of **AutoRepairBench**, our **CIKM '26** paper on knowledge distillation of large language models for long-tailed, safety-critical automotive repair reasoning.
 
-**AutoRepairBench: Benchmarking Long-Tailed, Safety-Critical Automotive Repair Reasoning.**  
-*Proceedings of the 35th ACM International Conference on Information and Knowledge Management (CIKM '26)*, November 07–11, 2026, Rome, Italy.  
-DOI: [10.1145/3799682.3840599](https://doi.org/10.1145/3799682.3840599) · ISBN: 979-8-4007-2539-5
+> **AutoRepairBench: Benchmarking Long-Tailed, Safety-Critical Automotive Repair Reasoning.**  
+> *Proceedings of the 35th ACM International Conference on Information and Knowledge Management (CIKM '26)*, November 07–11, 2026, Rome, Italy.  
+> DOI: [10.1145/3799682.3840599](https://doi.org/10.1145/3799682.3840599) · ISBN: 979-8-4007-2539-5
 
 We distill a domain-knowledge-enhanced **Qwen2.5-32B** teacher into a compact **Qwen2.5-7B** student, so the student can run offline in vehicle diagnostic settings while retaining teacher-level diagnostic structure.
 
@@ -23,7 +23,6 @@ We distill a domain-knowledge-enhanced **Qwen2.5-32B** teacher into a compact **
 - **Domain-knowledge rewards.** Optional knowledge-graph / GT validation and ECU-consistency rewards to reduce hallucinated control-unit or DTC content.
 - **Long-tail diagnostic data.** Square-root sampling over high-frequency repair texts, plus focal loss, to avoid collapsing onto a few common repair templates.
 - **Gated evaluation.** Multi-stage scoring with high-confidence pass, ECU/DTC entity checks, logic-conflict detection, and semantic arbitration.
-
 
 ## Repository Structure
 
@@ -46,12 +45,12 @@ More detail: [distillation/README.md](distillation/README.md) · [eval/README.md
 
 `Integrated_Data.json` contains **117,465** ECU/DTC diagnostic pairs.
 
-| Statistic | Count |
-|-----------|------:|
-| Samples | 117,465 |
-| Unique ECU IDs | 505 |
-| Unique ECU variants | 499 |
-| Unique DTC codes | 50,660 |
+| Statistic           |   Count |
+|---------------------|--------:|
+| Samples             | 117,465 |
+| Unique ECU IDs      |     505 |
+| Unique ECU variants |     499 |
+| Unique DTC codes    |  50,660 |
 
 Each record is a diagnosis request and a structured repair answer:
 
@@ -64,7 +63,6 @@ Each record is a diagnosis request and a structured repair answer:
   }
 }
 ```
-
 
 Data is released for **research use**. It contains OEM-style diagnostic wording (ECU names, DTC texts, service measures). Redistribute or use it only in line with applicable terms.
 
@@ -81,8 +79,8 @@ Evaluation additionally needs an OpenRouter (or compatible) API key and a senten
 Optional environment variables:
 
 ```bash
-export OPENROUTER_API_KEY=your_key          # evaluation LLM
-export NEO4J_PASSWORD=your_password         # only if you enable Neo4j fallback
+export OPENROUTER_API_KEY=your_key                         # evaluation LLM
+export NEO4J_PASSWORD=your_password                        # only if you enable Neo4j fallback
 export VLLM_MODEL=Qwen/Qwen2.5-32B-Instruct-AWQ
 export SEMANTIC_MODEL_PATH=/path/to/e5-mistral-7b-instruct
 ```
