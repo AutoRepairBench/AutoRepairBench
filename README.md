@@ -24,39 +24,6 @@ We distill a domain-knowledge-enhanced **Qwen2.5-32B** teacher into a compact **
 - **Long-tail diagnostic data.** Square-root sampling over high-frequency repair texts, plus focal loss, to avoid collapsing onto a few common repair templates.
 - **Gated evaluation.** Multi-stage scoring with high-confidence pass, ECU/DTC entity checks, logic-conflict detection, and semantic arbitration.
 
-## Method Overview
-
-```
-Integrated_Data.json
-        │
-        ▼
- Data prep (balance + train/val/benchmark split)
-        │
-        ▼
- SFT on Qwen2.5-7B (LoRA, JSON FaultDescription / RepairMeasures)
-        │
-        ├──────────────────────────────┐
-        ▼                              ▼
- Student (SFT checkpoint)     Teacher (vLLM, Qwen2.5-32B-AWQ + DK cache)
-        │                              │
-        └────────── PPO distill ───────┘
-                    reverse KL + DK/ECU reward
-                          │
-                          ▼
-              Compact offline 7B diagnostic model
-                          │
-                          ▼
-         Gated evaluator (LLM score + entity + arbitration)
-```
-
-Default models in `distillation/config.py`:
-
-| Role | Default checkpoint |
-|------|--------------------|
-| Teacher | `Qwen/Qwen2.5-32B-Instruct-AWQ` |
-| Student | `Qwen/Qwen2.5-7B-Instruct` |
-
-These paths are configurable. Some script comments still mention Qwen3; the runnable defaults above are the ones used unless you override them.
 
 ## Repository Structure
 
