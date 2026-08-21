@@ -1,53 +1,37 @@
 # Knowledge Distillation
 
-Distilling knowledge from **Qwen-32B + Domain Knowledge** into lightweight **Qwen-7B** for offline automotive fault diagnosis.
+Distill a domain-knowledge-enhanced **Qwen2.5-32B** teacher into a **Qwen2.5-7B** student for offline automotive fault diagnosis.
 
-## Project Structure
+Back to the [root README](../README.md).
+
+## Layout
 
 ```
 distillation/
-├── config.py              # Configuration
+├── config.py              # Paths, models, SFT / PPO hyperparameters
 ├── data/
-│   └── prepare_data.py    # Data preprocessing (balancing + formatting)
-├── train_sft.py           # Supervised fine-tuning
+│   └── prepare_data.py    # Long-tail balancing + train/val/benchmark splits
+├── train_sft.py           # LoRA SFT
 ├── teacher/
-│   ├── vllm_server.py     # vLLM deployment
-│   └── teacher_agent.py   # Teacher Agent (LLM + KG)
+│   ├── vllm_server.py     # Teacher serving
+│   └── teacher_agent.py   # Teacher + JSON GT cache (Neo4j optional)
 ├── distill/
-│   ├── reward.py          # Reward computation (Logits + KG)
+│   ├── reward.py          # Reverse KL + DK / ECU rewards
 │   ├── sampler.py         # Online sampling
-│   └── trainer.py         # PPO-based distillation
-└── scripts/               # Training scripts
+│   └── trainer.py         # PPO distillation
+└── scripts/               # Pipeline wrappers
 ```
 
-## Quick Start
+## Pipeline
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+| Stage | What it does |
+|-------|----------------|
+| **Data prep** | Square-root sampling on high-frequency `RepairMeasures`, convert to SFT format, split train / val / benchmark |
+| **SFT** | LoRA fine-tune Qwen2.5-7B to emit JSON `{FaultDescription, RepairMeasures}` |
+| **Teacher** | vLLM service; GT lookup from `Integrated_Data.json` (Neo4j fallback off by default) |
+| **Distillation** | PPO with reverse KL vs teacher logits, plus optional DK / ECU consistency rewards |
 
-# Run complete pipeline
-bash scripts/run_all.sh
-
-# Or run step by step:
-bash scripts/1_prepare_data.sh   # Data preprocessing
-bash scripts/2_train_sft.sh      # SFT training
-bash scripts/3_start_teacher.sh  # Start Teacher (new terminal)
-bash scripts/4_train_distill.sh  # Distillation
-```
-
-## Training Pipeline
-
-| Stage | Description |
-|-------|-------------|
-| **Data Prep** | Long-tail balancing via sqrt sampling, format conversion |
-| **SFT** | LoRA fine-tuning on Qwen-7B for JSON output format |
-| **Teacher** | vLLM service with DK-enhanced context |
-| **Distillation** | PPO with reverse KL + DK validation reward |
-
-## Key Configuration
-
-Edit `config.py`:
+Default checkpoints (override in `config.py` or via env):
 
 ```python
 MODEL_CONFIG = {
@@ -56,13 +40,49 @@ MODEL_CONFIG = {
 }
 ```
 
-## Hardware Requirements
+## Quick Start
 
-| Stage | GPU Memory |
+```bash
+pip install -r requirements.txt
+
+# Full pipeline (teacher must be started in a second terminal when prompted)
+bash scripts/run_all.sh
+
+# Or stage by stage
+bash scripts/1_prepare_data.sh
+bash scripts/2_train_sft.sh
+bash scripts/3_start_teacher.sh    # keep running
+bash scripts/4_train_distill.sh
+```
+
+`scripts/4_train_distill.sh` checks `http://127.0.0.1:8000/health` and exits if the teacher is down.
+
+Processed files written by step 1:
+
+| File | Role |
+|------|------|
+| `data/processed/sft_balanced.json` | Balanced full set |
+| `data/processed/train.json` | Training split |
+| `data/processed/val.json` | Validation split |
+| `data/processed/test_benchmark.json` | 500-instance held-out benchmark |
+| `data/processed/test_benchmark_subset.json` | 100-instance eval subset |
+
+## Hardware
+
+| Stage | GPU memory |
 |-------|------------|
-| SFT (LoRA) | 24GB+ |
-| Teacher (AWQ) | 20GB+ |
-| Distillation | 80GB (A100) |
+| SFT (LoRA, 7B) | 24 GB+ |
+| Teacher (AWQ 32B) | 20 GB+ |
+| Distillation | 80 GB (A100-class) |
+
+Teacher GT retrieval uses the JSON cache and does **not** need Neo4j unless you set `TEACHER_GT_CONFIG["use_neo4j_fallback"] = True`.
+
+Optional env vars:
+
+```bash
+export VLLM_MODEL=Qwen/Qwen2.5-32B-Instruct-AWQ
+export NEO4J_PASSWORD=your_password   # Neo4j fallback only
+```
 
 ## References
 

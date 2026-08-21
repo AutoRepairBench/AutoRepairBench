@@ -1,0 +1,100 @@
+cff-version: 1.2.0
+message: "If you use this repository or the paper, please cite the CIKM '26 paper."
+title: "AutoRepairBench: Benchmarking Long-Tailed, Safety-Critical Automotive Repair Reasoning"
+type: software
+authors:
+  - family-names: Zuo
+    given-names: Chenyu
+    email: chenyuzuo@ln.edu.hk
+    affiliation: "Lingnan University"
+  - family-names: Zhou
+    given-names: Xuechen
+    email: zhouxch33@mail2.sysu.edu.cn
+    affiliation: "Sun Yat-sen University"
+  - family-names: Chen
+    given-names: Yongqi
+    email: chenyq387@mail2.sysu.edu.cn
+    affiliation: "Sun Yat-sen University"
+  - family-names: Xue
+    given-names: Lei
+    email: xuelei3@mail.sysu.edu.cn
+    affiliation: "Sun Yat-sen University"
+  - family-names: Jiang
+    given-names: Shan
+    email: jiangsh73@mail.sysu.edu.cn
+    affiliation: "Sun Yat-sen University"
+  - family-names: Shen
+    given-names: Jiaxing
+    email: jiaxingshen@ln.edu.hk
+    affiliation: "Lingnan University"
+  - family-names: Dong
+    given-names: Chengzu
+    email: chengzudong@ln.edu.hk
+    affiliation: "Lingnan University"
+contact:
+  - family-names: Shen
+    given-names: Jiaxing
+    email: jiaxingshen@ln.edu.hk
+    affiliation: "Lingnan University"
+year: 2026
+url: "https://github.com/AutoRepairBench/Automotive-Fault-Diagnosis-via-Knowledge-Distilled-LLM"
+repository-code: "https://github.com/AutoRepairBench/Automotive-Fault-Diagnosis-via-Knowledge-Distilled-LLM"
+license: MIT
+keywords:
+  - automotive fault diagnosis
+  - knowledge distillation
+  - large language models
+  - MiniLLM
+  - ECU
+  - DTC
+  - CIKM
+identifiers:
+  - type: doi
+    value: 10.1145/3799682.3840599
+preferred-citation:
+  type: conference-paper
+  title: "AutoRepairBench: Benchmarking Long-Tailed, Safety-Critical Automotive Repair Reasoning"
+  authors:
+    - family-names: Zuo
+      given-names: Chenyu
+      email: chenyuzuo@ln.edu.hk
+      affiliation: "Lingnan University"
+    - family-names: Zhou
+      given-names: Xuechen
+      email: zhouxch33@mail2.sysu.edu.cn
+      affiliation: "Sun Yat-sen University"
+    - family-names: Chen
+      given-names: Yongqi
+      email: chenyq387@mail2.sysu.edu.cn
+      affiliation: "Sun Yat-sen University"
+    - family-names: Xue
+      given-names: Lei
+      email: xuelei3@mail.sysu.edu.cn
+      affiliation: "Sun Yat-sen University"
+    - family-names: Jiang
+      given-names: Shan
+      email: jiangsh73@mail.sysu.edu.cn
+      affiliation: "Sun Yat-sen University"
+    - family-names: Shen
+      given-names: Jiaxing
+      email: jiaxingshen@ln.edu.hk
+      affiliation: "Lingnan University"
+    - family-names: Dong
+      given-names: Chengzu
+      email: chengzudong@ln.edu.hk
+      affiliation: "Lingnan University"
+  year: 2026
+  month: 11
+  collection-title: "Proceedings of the 35th ACM International Conference on Information and Knowledge Management"
+  conference:
+    name: "CIKM '26"
+  publisher:
+    name: "Association for Computing Machinery"
+    city: "New York"
+    region: "NY"
+    country: "US"
+  address: "Rome, Italy"
+  isbn: "979-8-4007-2539-5"
+  doi: 10.1145/3799682.3840599
+  url: "https://doi.org/10.1145/3799682.3840599"
+  copyright: "CC-BY-4.0"
